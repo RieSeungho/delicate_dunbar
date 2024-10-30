@@ -1,10 +1,24 @@
 <article id="post-{{post.id}}">
     <header>
-        {% if post.user.profile_image %}
-            <img src="{{ post.user.profile_image.url }}" alt="">
-            <span>{{ post.user.username }}</span>
-        {% else %}
-            <span>없음</span>
+        <a href="{% url 'users:profile' user_id=post.user.id %}">
+            {% if post.user.profile_image %}
+                <img src="{{ post.user.profile_image.url }}" alt="">
+                <span>{{ post.user.username }}</span>
+            {% else %}
+                <span>없음</span>
+            {% endif %}
+        </a>
+        {% if user != post.user %}
+            <form action="{% url 'users:follow' user_id=post.user.id %}?next={{ action_redirect_url }}" method="POST">
+                {% csrf_token %}
+                <button type="submit">
+                    {% if post.user in user.following.all %}
+                        Unfollow
+                    {% else %}
+                        Follow
+                    {% endif %}
+                </button>
+            </form>
         {% endif %}
     </header>
     <div>
@@ -16,8 +30,11 @@
         </div>
     </div>
     <div>
-        <form action="">
-            <button>Likes(0)</button>
+        <form action="{% url 'posts:post_like' post_id=post.id %}?next={{ action_redirect_url }}" method="POST">
+            {% csrf_token %}
+            <button type="submit" {% if user in post.like_users.all %} style = "color: red;"{% endif %}>
+                Likes({{ post.like_users.count }})
+            </button>
         </form>
         <span>Comments({{ post.comment_set.count }})</span>
     </div>
