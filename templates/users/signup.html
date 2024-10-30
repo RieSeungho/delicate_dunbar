@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Sign up</h1>
+<form method="POST" enctype="multipart/form-data">
+    <h1>delicate dunbar</h1>
+    {% csrf_token %}
+    {{ form.as_div }}
+    <button type="submit">회원가입</button>
+</form>
+<a href="{% url 'users:login' %}">로그인 페이지로 이동</a>
+
+{% endblock %}
