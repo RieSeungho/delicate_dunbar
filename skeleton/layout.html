@@ -1,10 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/staticfiles/meyer-css/index.css">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="font.css">
 </head>
 <body>
+<div class="layout">
+    <aside class="navbar">
+        <ul class="navbar__list">
+            <li class="navbar__item">
+                <h1 class="navbar__logo">
+                    <a href="" class="navbar__link">delicate dunbar</a>
+                </h1>
+            </li>
+            <li class="navbar__item navbar__item--principal">
+                <a href="" class="navbar__principal">
+                    <img src="american.png" alt="" class="principal__image">
+                    <div class="navbar__profile">
+                        <p>python@email.com</p>
+                        <p>pypy1234</p>
+                    </div>
+                </a>
+            </li>
+            <li class="navbar__item">
+                <a href="" class="navbar__link">새 포스트 작성</a>
+            </li>
+            <li class="navbar__item">
+                <a href="" class="navbar__link">로그아웃</a>
+            </li>
+        </ul>
+    </aside>
+    <main class="main">
+        <article class="profile__article">
+            <header class="profile__header">
+                <img src="german_profile.png" alt="" class="profile__image">
+            </header>
+            <div class="profile__body">
+                <div class="profile__content">
+                    <h1 class="profile__username">김대중</h1>
+                    <p class="profile__bio">안녕하세요</p>
+                </div>
+                <ul class="profile__list">
+                    <li class="profile__item">
+                        <a href="" class="profile__link">게시글(10)</a>
+                    </li>
+                    <li class="profile__item">
+                        <a href="" class="profile__link">팔로잉(10)</a>
+                    </li>
+                    <li class="profile__item">
+                        <a href="" class="profile__link">팔로워(10)</a>
+                    </li>
+                </ul>
+            </div>
+        </article>
+        <article class="follow__article">
+            <div class="follow__principal">
+                <a href="" class="follow__link">
+                    <img src="irish_profile.png" alt="" class="principal__image">
+                    <div class="follow__profile">
+                        <span>grace1234@email.com</span>
+                        <span>2024-10-30일 팔로잉</span>
+                    </div>
+                </a>
+            </div>
 
+        </article>
+        <article class="post__article">
+            <header class="post__header">
+                <a href="" class="post__principal">
+                    <img src="irish_profile.png" alt="" class="principal__image">
+                    <div class="post__profile">
+                        <span>grace1234@email.com</span>
+                        <span>grace1234</span>
+                    </div>
+                </a>
+                <a href="">
+                    <form action="">
+                        <button class="button">팔로우</button>
+                    </form>
+                </a>
+            </header>
+            <div class="post__body">
+                <div class="post__images">
+                    <img src="german_profile.png" alt="" class="post__image">
+                </div>
+                <p class="post__content">안녕하세요</p>
+                <div class="post__tags">
+                    <a href="" class="post__tag">#테스트</a>
+                    <a href="" class="post__tag">#샤덴프로이데</a>
+                </div>
+            </div>
+            <div class="like__form">
+                <form action="">
+                    <button class="like__button">Likes(100)</button>
+                </form>
+                <span>Comments(100)</span>
+            </div>
+            <small class="post__created">작성일자 2024-10-31</small>
+            <div class="post__comment">
+                <ul class="comment__list">
+                    <li class="comment__item">
+                        <div class="comment__header">
+                            <a href="" class="comment__principal">
+                                <img src="irish_profile.png" alt="" class="principal__image">
+                                <div class="comment__profile">
+                                    <span>grace1234@email.com</span>
+                                    <span>grace1234</span>
+                                </div>
+                            </a>
+                            <form action="" method="POST">
+                                <button class="button">삭제</button>
+                            </form>
+                        </div>
+                        <p class="comment__content">안녕하세요 python 님</p>
+                    </li>
+                </ul>
+            </div>
+            <form action="" class="comment__form">
+                <textarea name="" id="" cols="30" rows="10" class="comment__textarea"></textarea>
+                <div class="button__binder">
+                    <button class="button">게시</button>
+                </div>
+            </form>
+        </article>
+    </main>
+</div>
 </body>
 </html>
