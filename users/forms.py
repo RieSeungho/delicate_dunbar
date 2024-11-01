@@ -6,22 +6,58 @@ class LoginForm(forms.Form):
     username = forms.CharField(
         min_length=3,
         widget=forms.TextInput(
-            attrs={'placeholder': '사용자명 (3자리 이상)', 'class': 'form-control'}
+            attrs={'placeholder': '사용자명 (3자리 이상)', 'class': 'input'}
         ),
     )
     password = forms.CharField(
         min_length=4,
         widget=forms.PasswordInput(
-            attrs={'placeholder': '비밀번호 (4자리 이상)', 'class': 'form-control'}
+            attrs={'placeholder': '비밀번호 (4자리 이상)', 'class': 'input'}
         ),
     )
 
 class SignupForm(forms.Form):
-    username = forms.CharField()
-    password1 = forms.CharField()
-    password2 = forms.CharField()
-    email = forms.EmailField()
-    profile_image = forms.ImageField(required=False)
+    username = forms.CharField(
+        min_length=3,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '사용자명 (3자리 이상)',
+                'class': 'input',
+                'id': 'username'}
+        )
+    )
+    password1 = forms.CharField(
+        min_length=4,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '비밀번호 (4자리 이상)',
+                'class': 'input',
+                'id': 'password1'}
+        )
+    )
+    password2 = forms.CharField(
+        min_length=4,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '비밀번호 확인 (4자리 이상)',
+                'class': 'input',
+                'id': 'password2'}
+        )
+    )
+    email = forms.EmailField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '이메일 (example@email.com)',
+                'class': 'input',
+                'id': 'email'}
+        )
+    )
+    profile_image = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(
+            attrs={'class' : 'input', 'id': 'profile_image'}
+        )
+    )
     bio = forms.CharField(max_length=500, required=False)
 
     def clean_username(self):
