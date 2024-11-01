@@ -28,7 +28,7 @@ class SignupForm(forms.Form):
     )
     password1 = forms.CharField(
         min_length=4,
-        widget=forms.TextInput(
+        widget=forms.PasswordInput(
             attrs={
                 'placeholder': '비밀번호 (4자리 이상)',
                 'class': 'input',
@@ -37,7 +37,7 @@ class SignupForm(forms.Form):
     )
     password2 = forms.CharField(
         min_length=4,
-        widget=forms.TextInput(
+        widget=forms.PasswordInput(
             attrs={
                 'placeholder': '비밀번호 확인 (4자리 이상)',
                 'class': 'input',
