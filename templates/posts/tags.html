@@ -1,13 +1,6 @@
-{% extends 'base_nav.html' %}
+{% extends 'base_aside.html' %}
 
 {% block content %}
-<nav>
-  <h1>
-    <a href="{% url 'posts:feeds' }">delicate dunbar</a>
-  </h1>
-  <a href="{% url 'posts:post_add' %}">Add Post</a>
-  <a href="{% url 'users:logout' %}">Logout</a>
-</nav>
 <div>
   <header>
     <h2>#{{ tag_name }}</h2>

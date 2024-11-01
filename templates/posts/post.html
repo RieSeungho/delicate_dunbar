@@ -1,9 +1,13 @@
-<article id="post-{{post.id}}">
-    <header>
-        <a href="{% url 'users:profile' user_id=post.user.id %}">
+{% load static %}
+<article class="post__article" id="post-{{post.id}}">
+    <header class="post__header">
+        <a href="{% url 'users:profile' user_id=post.user.id %}" class="post__principal">
             {% if post.user.profile_image %}
-                <img src="{{ post.user.profile_image.url }}" alt="">
-                <span>{{ post.user.username }}</span>
+                <img src="{{ post.user.profile_image.url }}" alt="" class="principal__image">
+                <div class="post__profile">
+                    <span>{{ post.user.email }}</span>
+                    <span>{{ post.user.username }}</span>
+                </div>
             {% else %}
                 <span>없음</span>
             {% endif %}
@@ -11,7 +15,7 @@
         {% if user != post.user %}
             <form action="{% url 'users:follow' user_id=post.user.id %}?next={{ action_redirect_url }}" method="POST">
                 {% csrf_token %}
-                <button type="submit">
+                <button type="submit" class="button">
                     {% if post.user in user.following.all %}
                         Unfollow
                     {% else %}
@@ -21,59 +25,82 @@
             </form>
         {% endif %}
     </header>
-    <div>
-        {{ post.content|linebreaksbr }}
-        <div>
+
+    <div class="post__body">
+        {% if post.postimage_set.all %}
+        <div class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for image in post.postimage_set.all %}
+                        {% if image.photo %}
+                        <li class="splide__slide post__images">
+                            <img src="{{ image.photo.url }}" alt="" class="post__image">
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        <p class="post__content">
+            {{ post.content|linebreaksbr }}
+        </p>
+        <div class="post__tags">
             {% for tag in post.tags.all %}
-                <a href="{% url 'posts:tags' tag_name=tag.name %}">#{{ tag.name }}</a>
+                <a href="{% url 'posts:tags' tag_name=tag.name %}" class="post__tag">#{{ tag.name }}</a>
             {% endfor %}
         </div>
     </div>
-    <div>
+    <div class="like__form">
         <form action="{% url 'posts:post_like' post_id=post.id %}?next={{ action_redirect_url }}" method="POST">
             {% csrf_token %}
-            <button type="submit" {% if user in post.like_users.all %} style = "color: red;"{% endif %}>
+            <button type="submit" class="like__button" {% if user in post.like_users.all %} style = "color: red;"{% endif %}>
                 Likes({{ post.like_users.count }})
             </button>
         </form>
         <span>Comments({{ post.comment_set.count }})</span>
     </div>
-    <div class="splide">
-        <div class="splide__track">
-            <ul class="splide__list">
-                {% for image in post.postimage_set.all %}
-                    {% if image.photo %}
-                    <li class="splide__slide">
-                        <img src="{{ image.photo.url }}" alt="">
-                    </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    <div>
-        <ul>
+    <small class="post__created">{{ post.created }}</small>
+    <div class="post__comment">
+        <ul class="comment__list">
             {% for comment in post.comment_set.all %}
-            <li>
-                <span>{{ comment.user.username }}</span>
-                <span>{{ comment.content }}</span>
+            <li class="comment__item">
+                <div class="comment__header">
+                <a href="" class="comment__principal">
+                    {% if comment.user.profile_image %}
+                    <img src="{{ comment.user.profile_image.url }}" alt="" class="principal__image">
+                    {% else %}
+                    <img src="{% static 'image/default.png' %}" alt="" class="principal__image">
+                    {% endif %}
+                    <div class="comment__profile">
+                    {% if comment.user.email %}
+                        <span>{{ comment.user.email }}</span>
+                    {% else %}
+                        <span>이메일이 등록되지 않은 유저</span>
+                    {% endif %}
+                        <span>{{ comment.user.username }}</span>
+                    </div>
+                </a>
                 {% if user == comment.user %}
                     <form method="POST" action="{% url 'posts:comment_delete' comment_id=comment.id %}">
                         {% csrf_token %}
-                        <button type="submit">삭제</button>
+                        <button type="submit" class="button">삭제</button>
                     </form>
                 {% endif%}
+                </div>
+                <p class="comment__content">{{ comment.content }}</p>
             </li>
             {% endfor %}
         </ul>
     </div>
-    <small>{{ post.created }}</small>
     <div>
-        <form action="{% url 'posts:comment_add' %}?next={{ action_redirect_url }}" method="POST">
+        <form action="{% url 'posts:comment_add' %}?next={{ action_redirect_url }}" class="comment__form" method="POST">
             {% csrf_token %}
             <input type="hidden" name="post" value="{{ post.id }}">
             {{ comment_form.content }}
-            <button type="submit">게시</button>
+            <div class="button__binder">
+                <button type="submit" class="button">게시</button>
+            </div>
         </form>
     </div>
 </article>

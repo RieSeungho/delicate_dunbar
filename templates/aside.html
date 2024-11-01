@@ -1,0 +1,35 @@
+{% load static %}
+<aside class="navbar">
+    <ul class="navbar__list">
+        <li class="navbar__item">
+            <h1 class="navbar__logo">
+                <a href="{% url 'posts:feeds' %}" class="navbar__link">delicate dunbar</a>
+            </h1>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="navbar__item navbar__item--principal">
+            <a href="{% url 'users:profile' user_id=user.id %}" class="navbar__principal">
+                {% if user.profile_image %}
+                    <img src="{{ user.profile_image.url }}" alt="" class="principal__image">
+                {% else %}
+                    <img src="{% static 'image/default.png' %}" alt="" class="principal__image"></img>
+                {% endif %}
+                <div class="navbar__profile">
+                {% if user.email %}
+                    <p>{{ user.email }}</p>
+                {% else %}
+                    <p>이메일이 등록되지 않은 유저</p>
+                {% endif %}
+                    <p>{{ user.username }}</p>
+                </div>
+            </a>
+        </li>
+        {% endif %}
+        <li class="navbar__item">
+            <a href="{% url 'posts:post_add' %}" class="navbar__link">새 포스트 작성</a>
+        </li>
+        <li class="navbar__item">
+            <a href="{% url 'users:logout' %}" class="navbar__link">로그아웃</a>
+        </li>
+    </ul>
+</aside>

@@ -1,25 +1,28 @@
-{% extends 'base_nav.html' %}
+{% extends 'base_aside.html' %}
 
 {% block content %}
-<nav>
-    <h1>
-        <a href="{% url 'posts:feeds' %}">delicate dunbar</a>
-    </h1>
-</nav>
-<div>
-    <h1>Post 작성</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div>
-            <label for="id_images">이미지</label>
-            <input type="file" id="id_images" name="images" multiple>
-        </div>
-        {{ form.as_div }}
-        <div>
-            <label for="">해시태그</label>
-            <input type="text" name="tags" placeholder="쉼표로 구분해서 여러 태그를 입력">
-        </div>
-        <button type="submit">게시</button>
-    </form>
-</div>
+<main class="main">
+    <article class="post__article">
+        <form method="POST" enctype="multipart/form-data" class="comment__form">
+            {% csrf_token %}
+            <div class="input__binder">
+                {{ form.content }}
+            </div>
+            <div class="input__binder">
+                <label for="" class="input__label">해시태그</label>
+                <input type="text" name="tags" class="input" placeholder="쉼표로 구분해서 여러 태그를 입력">
+            </div>
+            <div class="input__binder">
+                <label for="id_images" class="input__label">이미지</label>
+            </div>
+            <div class="input__binder">
+                <label for="id_images" class="input__label--file">이미지 업로드</label>
+                <input type="file" id="id_images" name="images" class="input" multiple>
+            </div>
+            <div class="button__binder">
+                <button type="submit" class="button">게시</button>
+            </div>
+        </form>
+    </article>
+</main>
 {% endblock %}

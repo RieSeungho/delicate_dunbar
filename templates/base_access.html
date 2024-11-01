@@ -1,0 +1,8 @@
+{% extends '_base.html' %}
+
+{% block base_content %}
+    <div class="layout layout--access">
+        {% include 'fragment/jumbotron.html' %}
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}

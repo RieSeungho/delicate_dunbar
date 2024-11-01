@@ -1,11 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'base_access.html' %}
 
 {% block content %}
-<h1>Login</h1>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_div }}
-    <button type="submit">로그인</button>
-</form>
-<a href="{% url 'users:signup' %}">회원가입</a>
+<article class="access__article">
+    <form method="POST" class="access__form">
+        {% csrf_token %}
+        <div class="access__header">
+            <h1 class="access__title">로그인</h1>
+            {% if form.non_field_errors %}
+            <small class="invalidate">{{ form.non_field_errors.0 }}</small>
+            {% endif %}
+        </div>
+        <div class="input__binder">
+            <label for="" class="input__label">아이디</label>
+            {{ form.username }}
+        </div>
+        <div class="input__binder">
+            <label for="" class="input__label">비밀번호</label>
+            {{ form.password }}
+        </div>
+        <div class="button__binder">
+            <button type="submit" class="button button--access">로그인</button>
+        </div>
+        <a href="{% url 'users:signup' %}" class="access__link">회원가입 페이지로 이동</a>
+    </form>
+</article>
 {% endblock %}

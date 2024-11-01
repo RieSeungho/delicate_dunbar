@@ -1,4 +1,4 @@
-{% extends '_base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block head %}
@@ -7,12 +7,16 @@
 {% endblock %}
 
 {% block base_content %}
-    {% include 'nav.html' %}
-    {% block content %}{% endblock %}
-    <script>
-        const elms = document.getElementsByClassName('splide');
-        for (let i = 0; i < elms.length; i++) {
-            new Splide(elms[i]).mount();
-        }
-    </script>
+    <div class="layout">
+        {% include 'aside.html' %}
+        <main class="main">
+        {% block content %}{% endblock %}
+        </main>
+        <script>
+            const elms = document.getElementsByClassName('splide');
+            for (let i = 0; i < elms.length; i++) {
+                new Splide(elms[i]).mount();
+            }
+        </script>
+    </div>
 {% endblock %}

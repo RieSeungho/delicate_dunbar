@@ -1,13 +1,65 @@
-{% extends 'base.html' %}
+{% extends 'base_access.html' %}
 
 {% block content %}
-<h1>Sign up</h1>
-<form method="POST" enctype="multipart/form-data">
-    <h1>delicate dunbar</h1>
-    {% csrf_token %}
-    {{ form.as_div }}
-    <button type="submit">회원가입</button>
-</form>
-<a href="{% url 'users:login' %}">로그인 페이지로 이동</a>
-
+<article class="access__article">
+    <form method="POST" enctype="multipart/form-data" class="access__form">
+        {% csrf_token %}
+        <div class="access__header">
+            <h1 class="access__title">회원가입</h1>
+            {% if form.non_field_errors %}
+            <small class="invalidate">{{ form.non_field_errors.0 }}</small>
+            {% endif %}
+        </div>
+        <div class="input__binder">
+            <label for="username" class="input__label">
+                <span>아이디</span>
+                {% if form.username.errors %}
+                    <small class="invalidate">{{ form.username.errors.0 }}</small>
+                {% endif %}
+            </label>
+            {{ form.username }}
+        </div>
+        <div class="input__binder">
+            <label for="password1" class="input__label">
+                <span>비밀번호</span>
+                {% if form.password1.errors %}
+                    <small class="invalidate">{{ form.password1.errors.0 }}</small>
+                {% endif %}
+            </label>
+            {{ form.password1 }}
+        </div>
+        <div class="input__binder">
+            <label for="password2" class="input__label">
+                <span>비밀번호 확인</span>
+                {% if form.password2.errors %}
+                    <small class="invalidate">{{ form.password2.errors.0 }}</small>
+                {% endif %}
+            </label>
+            {{ form.password2 }}
+        </div>
+        <div class="input__binder">
+            <label for="email" class="input__label">
+                <span>이메일</span>
+                {% if form.email.errors %}
+                    <small class="invalidate">{{ form.email.errors.0 }}</small>
+                {% endif %}
+            </label>
+            {{ form.email }}
+        </div>
+        <div class="input__binder">
+            <label for="profile_image" class="input__label">
+                <span>프로파일 이미지</span>
+                {% if form.profile_image.errors %}
+                    <small class="invalidate">{{ form.profile_image.errors.0 }}</small>
+                {% endif %}
+            </label>
+            <label for="profile_image" class="input__label input__label--file">프로파일 이미지 등록</label>
+            {{ form.profile_image }}
+        </div>
+        <div class="button__binder">
+            <button type="submit" class="button button--access">회원가입</button>
+        </div>
+        <a href="{% url 'users:login' %}" class="access__link">로그인 페이지로 이동</a>
+    </form>
+</article>
 {% endblock %}

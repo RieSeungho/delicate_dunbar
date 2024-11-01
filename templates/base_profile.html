@@ -1,33 +1,47 @@
-{% extends 'base_nav.html' %}
+{% extends 'base_aside.html' %}
+{% load static %}
 
 {% block content %}
-<div>
-  <div>
+<main class="main">
+  <article class="profile__article">
+    <header class="profile__header">
     {% if user.profile_image %}
-      <img src="{{ user.profile_image.url }}" alt="">
+      <img src="{{ user.profile_image.url }}" class="profile__image" alt="">
+    {% else %}
+      <img src="{% static 'image/default.png' %}" class="profile__image" alt="">
     {% endif%}
-
+    </header>
     <div>
-      <h1>{{ user.username }}</h1>
-      <div>
-        <dl>
-          <dt>Posts</dt>
-          <dd>
-            <a href="{% url 'users:profile' user_id=user.id %}">{{ user.post_set.count }}</a>
-          </dd>
-          <dt>Following</dt>
-          <dd>
-            <a href="{% url 'users:following' user_id=user.id %}">{{ user.following.count }}</a>
-          </dd>
-          <dt>Followers</dt>
-          <dd>
-            <a href="{% url 'users:followers' user_id=user.id %}">{{ user.followers.count }}</a>
-          </dd>
-        </dl>
+      <div class="profile__content">
+        <h1 class="profile__username">{{ user.username }}</h1>
+        <p class="profile__bio">{{ user.bio }}</p>
       </div>
-      <p>{{ user.bio }}</p>
+      <ul class="profile__list">
+          <li class="profile__item">
+              <a href="{% url 'users:profile' user_id=user.id %}" class="profile__link">
+                <span>게시글</span>
+                {% if user.post_set.count %}
+                <span>({{ user.post_set.count }})</span>
+                {% else %}
+                <span>(0)</span>
+                {% endif %}
+              </a>
+          </li>
+          <li class="profile__item">
+              <a href="{% url 'users:following' user_id=user.id %}" class="profile__link">
+                <span>팔로잉</span>
+                <span>({{ user.following.count }})</span>
+              </a>
+          </li>
+          <li class="profile__item">
+              <a href="{% url 'users:followers' user_id=user.id %}" class="profile__link">
+                <span>팔로워</span>
+                <span>({{ user.followers.count }})</span>
+              </a>
+          </li>
+      </ul>
     </div>
-  </div>
+  </article>
   {% block bottom_data %}{% endblock %}
-</div>
+</main>
 {% endblock %}
