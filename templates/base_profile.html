@@ -20,8 +20,8 @@
           <li class="profile__item">
               <a href="{% url 'users:profile' user_id=user.id %}" class="profile__link">
                 <span>게시글</span>
-                {% if user.post_set.count %}
-                <span>({{ user.post_set.count }})</span>
+                {% if user.author_posts.count %}
+                <span>({{ user.author_posts.count }})</span>
                 {% else %}
                 <span>(0)</span>
                 {% endif %}

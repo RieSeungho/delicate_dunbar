@@ -1,15 +1,22 @@
 {% extends 'base_profile.html' %}
+{% load static %}
 
 {% block bottom_data %}
-<div>
-  {% for post in user.post_set.all %}
-    {% if post.postimage_set.first and post.postimage_set.first.photo %}
-      <div>
-        <a href="{% url 'posts:post_detail' post_id=post.id }">
-          <img src="{{ post.postimage_set.first.photo.url }}" alt="">
+<article class="tag__article">
+  <div class="tag__items">
+  {% for post in user.author_posts.all %}
+      {% if post.postimage_set.first and post.postimage_set.first.photo %}
+        <a href="{% url 'posts:post_detail' post_id=post.id %}" class="tag__item">
+          <img src="{{ post.postimage_set.first.photo.url }}" alt="" class="tag__image">
+          <div class="tag__overview">{{ post.content|truncatechars:15}}</div>
         </a>
-      </div>
-    {% endif %}
+      {% else %}
+        <a href="{% url 'posts:post_detail' post_id=post.id %}" class="tag__item">
+          <img src="{% static 'image/default.png' %}" alt="" class="tag__image">
+          <div class="tag__overview">{{ post.content|truncatechars:15}}</div>
+        </a>
+      {% endif %}
   {% endfor %}
-</div>
+  </div>
+</article>
 {% endblock %}

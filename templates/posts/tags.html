@@ -1,23 +1,24 @@
 {% extends 'base_aside.html' %}
 
 {% block content %}
-<div>
-  <header>
-    <h2>#{{ tag_name }}</h2>
-    <div>게시물 {{ posts.count }}</div>
-  </header>
-  <div>
+<main class="main">
+  <article class="tag__article">
+    <header class="tag__header">
+        <h2 class="tag__title">#{{ tag_name }}</h2>
+        <span>{{ posts.count }}건의 게시물</span>
+    </header>
+    <div class="tag__items">
     {% for post in posts %}
-      {% if post.postimage_set.first and post.postimage_set.first.photo %}
-      <div>
-        <a href="{% url 'posts:post_detail' post_id=post.id %}">
-          <img src="{{ post.postimage_set.first.photo.url }}" alt="">
+        {% if post.postimage_set.first and post.postimage_set.first.photo %}
+        <a href="{% url 'posts:post_detail' post_id=post.id %}" class="tag__item">
+            <img src="{{ post.postimage_set.first.photo.url }}" alt="" class="tag__image">
+            <div class="tag__overview">{{ post.content|truncatechars:15 }}</div>
         </a>
-      </div>
-      {% endif %}
-      {% empty %}
+        {% endif %}
+        {% empty %}
         <p>검색된 게시물이 없습니다</p>
     {% endfor %}
-  </div>
-</div>
+    </div>
+  </article>
+</main>
 {% endblock %}

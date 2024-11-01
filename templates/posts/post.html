@@ -5,7 +5,11 @@
             {% if post.user.profile_image %}
                 <img src="{{ post.user.profile_image.url }}" alt="" class="principal__image">
                 <div class="post__profile">
+                    {% if post.user.email %}
                     <span>{{ post.user.email }}</span>
+                    {% else %}
+                    <span>이메일이 등록되지 않은 유저</span>
+                    {% endif %}
                     <span>{{ post.user.username }}</span>
                 </div>
             {% else %}
@@ -17,9 +21,9 @@
                 {% csrf_token %}
                 <button type="submit" class="button">
                     {% if post.user in user.following.all %}
-                        Unfollow
+                        <span>팔로우</span>
                     {% else %}
-                        Follow
+                        <span>팔로우 취소</span>
                     {% endif %}
                 </button>
             </form>
@@ -47,20 +51,29 @@
         </p>
         <div class="post__tags">
             {% for tag in post.tags.all %}
-                <a href="{% url 'posts:tags' tag_name=tag.name %}" class="post__tag">#{{ tag.name }}</a>
+                <a href="{% url 'posts:tags' tag_name=tag.name %}" class="post__tag">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <span>{{ tag.name }}</span>
+                </a>
             {% endfor %}
         </div>
     </div>
     <div class="like__form">
         <form action="{% url 'posts:post_like' post_id=post.id %}?next={{ action_redirect_url }}" method="POST">
             {% csrf_token %}
-            <button type="submit" class="like__button" {% if user in post.like_users.all %} style = "color: red;"{% endif %}>
-                Likes({{ post.like_users.count }})
+            <button type="submit" class="button--secondary" {% if user in post.like_users.all %} style = "color: red;"{% endif %}>
+                <i class="fa-solid fa-thumbs-up"></i>
+                <span>좋아요</span>
+                <span>({{ post.like_users.count }})</span>
             </button>
         </form>
-        <span>Comments({{ post.comment_set.count }})</span>
+        <a href="{% url 'posts:post_detail' post_id=post.id %}" class="button--secondary">
+            <i class="fa-solid fa-comment"></i>
+            <span>코멘트</span>
+            <span>({{ post.comment_set.count }})</span>
+        </a>
     </div>
-    <small class="post__created">{{ post.created }}</small>
+    <small class="post__created">{{ post.created|date:"Y년 m월 d일 h시 i분에 작성됨" }}</small>
     <div class="post__comment">
         <ul class="comment__list">
             {% for comment in post.comment_set.all %}
