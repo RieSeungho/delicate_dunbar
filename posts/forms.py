@@ -10,7 +10,8 @@ class CommentForm(forms.ModelForm):
         ]
         widgets = {
             'content': forms.Textarea(attrs={
-                'placeholder': '댓글을 입력해주세요...',
+                'placeholder': '코멘트를 입력해주세요',
+                'class': 'comment__textarea'
             })
         }
 
@@ -20,3 +21,9 @@ class PostForm(forms.ModelForm):
         fields = [
             'content',
         ]
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'placeholder': '게시할 내용을 입력해주세요',
+                'class': 'comment__textarea'
+            })
+        }

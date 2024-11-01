@@ -59,10 +59,11 @@ def post_add(request):
             for image_file in request.FILES.getlist('images'):
                 PostImage.objects.create(
                     post=post,
-                    image=image_file,
+                    photo=image_file,
                 )
 
             tag_string = request.POST.get('tags')
+
             if tag_string:
                 tag_names = [tag_name.strip() for tag_name in tag_string.split(',')]
                 for tag_name in tag_names:
