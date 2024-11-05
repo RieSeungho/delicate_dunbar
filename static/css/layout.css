@@ -180,6 +180,17 @@ body {
     text-decoration: none;
 }
 
+.button--interaction {
+    cursor: pointer;
+    transition: 150ms ease-in-out;
+}
+
+.button--interaction:hover,
+.button--interaction:focus {
+    color: #FFFFFF;
+    background-color: #6495ED;
+}
+
 .like__form {
     display: flex;
     flex-direction: row;
@@ -213,7 +224,6 @@ body {
 }
 
 .post__created {
-    border-bottom: 1px solid #D3D3D3;
     padding: 0 1rem 1rem 1rem;
 }
 
@@ -233,6 +243,15 @@ body {
     border-bottom: 1px solid #D3D3D3;
 }
 
+.comment__item:first-child {
+    border-top: 1px solid #D3D3D3;
+}
+
+.comment__item:last-child,
+.comment__item:only-child {
+    border-bottom: none;
+}
+
 .comment__header {
     display: flex;
     flex-direction: row;
@@ -241,6 +260,7 @@ body {
 }
 
 .comment__form {
+    border-top: 1px solid #D3D3D3;
     padding: 1rem;
 }
 
@@ -315,6 +335,7 @@ body {
     text-align: center;
 }
 
+.profile__link.active,
 .profile__link:hover,
 .profile__link:focus {
     color: #6495ED;
