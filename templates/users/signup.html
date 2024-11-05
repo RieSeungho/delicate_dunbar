@@ -53,11 +53,11 @@
                     <small class="invalidate">{{ form.profile_image.errors.0 }}</small>
                 {% endif %}
             </label>
-            <label for="profile_image" class="input__label input__label--file">프로파일 이미지 등록</label>
+            <label for="profile_image" class="input__label input__label--file button--interaction">프로파일 이미지 등록</label>
             {{ form.profile_image }}
         </div>
         <div class="button__binder">
-            <button type="submit" class="button button--access">회원가입</button>
+            <button type="submit" class="button button--access button--interaction">회원가입</button>
         </div>
         <a href="{% url 'users:login' %}" class="access__link">로그인 페이지로 이동</a>
     </form>

@@ -19,9 +19,18 @@
             {{ form.password }}
         </div>
         <div class="button__binder">
-            <button type="submit" class="button button--access">로그인</button>
+            <button type="submit" class="button button--access button--interaction">로그인</button>
         </div>
         <a href="{% url 'users:signup' %}" class="access__link">회원가입 페이지로 이동</a>
+        <a href="/admin/" class="access__link">관리자 페이지로 이동(개발용)</a>
+        <p>
+            <span>관리자 아이디</span>
+            <span>id => python | password => 1234</span>
+        </p>
+        <p>
+            <span>일반 아이디</span>
+            <span>id => user1234 | password => 1234</span>
+        </p>
     </form>
 </article>
 {% endblock %}

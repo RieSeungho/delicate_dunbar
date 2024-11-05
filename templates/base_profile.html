@@ -11,36 +11,36 @@
       <img src="{% static 'image/default.png' %}" class="profile__image" alt="">
     {% endif%}
     </header>
-    <div>
-      <div class="profile__content">
-        <h1 class="profile__username">{{ user.username }}</h1>
-        <p class="profile__bio">{{ user.bio }}</p>
-      </div>
-      <ul class="profile__list">
-          <li class="profile__item">
-              <a href="{% url 'users:profile' user_id=user.id %}" class="profile__link">
-                <span>게시글</span>
-                {% if user.author_posts.count %}
-                <span>({{ user.author_posts.count }})</span>
-                {% else %}
-                <span>(0)</span>
-                {% endif %}
-              </a>
-          </li>
-          <li class="profile__item">
-              <a href="{% url 'users:following' user_id=user.id %}" class="profile__link">
-                <span>팔로잉</span>
-                <span>({{ user.following.count }})</span>
-              </a>
-          </li>
-          <li class="profile__item">
-              <a href="{% url 'users:followers' user_id=user.id %}" class="profile__link">
-                <span>팔로워</span>
-                <span>({{ user.followers.count }})</span>
-              </a>
-          </li>
-      </ul>
-    </div>
+        <div>
+          <div class="profile__content">
+            <h1 class="profile__username">{{ user.username }}</h1>
+            <p class="profile__bio">{{ user.bio }}</p>
+          </div>
+          <ul class="profile__list">
+              <li class="profile__item">
+                  <a href="{% url 'users:profile' user_id=user.id %}" {% if request.resolver_match.url_name == 'profile' %} class="profile__link active" {% else %} class="profile__link" {% endif %}>
+                    <span>게시글</span>
+                    {% if user.author_posts.count %}
+                    <span>({{ user.author_posts.count }})</span>
+                    {% else %}
+                    <span>(0)</span>
+                    {% endif %}
+                  </a>
+              </li>
+              <li class="profile__item">
+                  <a href="{% url 'users:following' user_id=user.id %}" {% if request.resolver_match.url_name == 'following' %} class="profile__link active" {% else %} class="profile__link" {% endif %}>
+                    <span>팔로잉</span>
+                    <span>({{ user.following.count }})</span>
+                  </a>
+              </li>
+              <li class="profile__item">
+                  <a href="{% url 'users:followers' user_id=user.id %}" {% if request.resolver_match.url_name == 'followers' %} class="profile__link active" {% else %} class="profile__link" {% endif %}>
+                    <span>팔로워</span>
+                    <span>({{ user.followers.count }})</span>
+                  </a>
+              </li>
+          </ul>
+        </div>
   </article>
   {% block bottom_data %}{% endblock %}
 </main>

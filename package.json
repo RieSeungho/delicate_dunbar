@@ -10,6 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@splidejs/splide": "^4.1.4"
+    "@splidejs/splide": "^4.1.4",
+    "dropzone": "^6.0.0-beta.2",
+    "meyer-css": "^2.0.1"
   }
 }
